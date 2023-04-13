@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width" />
-    <title>Bubby’s World</title>
+    <title>Bubby's World</title>
     <link rel="stylesheet" href="style.css" />
     <style>
       html, body {
@@ -19,6 +19,10 @@
       b {
         font-weight: bold;
       }
+      .container_climate {
+        position: relative;
+        left: 20px !important;
+      }
     </style>
   </head>
   <body>
@@ -27,77 +31,87 @@
       <p class="time"></p>
       <hr>
     </div>
-    <div style="position: relative; float: right; right: 30px; text-align: center" class="container_climate">
+    <div style="position: relative; float: left; left: 30px; text-align: center" class="container_climate">
       <h1 class="season"></h1>
       <p class="temp"></p>
       <p class="humidity"></p>
+      <b class="description"></b>
       <hr>
     </div>
     <script>
-    function suffix(i, d = false) {
-      let j = i % 10;
-      let k = i % 100;
-      if (j == 1 && k != 11) {
-        return i + (d ? "<sup>st</sup>" : "st");
-      }
-      if (j == 2 && k != 12) {
-        return i + (d ? "<sup>nd</sup>" : "nd");
-      }
-      if (j == 3 && k != 13) {
-        return i + (d ? "<sup>rd</sup>" : "rd");
-      }
-      return i + (d ? "<sup>th</sup>" : "th");
-    }
-
-    let monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    let dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    let temp = 0;
-    let season = "";
-    let hrs = 0;
-    let days = 0;
-
-    setInterval(() => {
-      temp = (Math.floor(Math.random() * (2000 - (days / 100))) / 100) + 70;
-      season = daysFormat(days, 0) >= 1 && daysFormat(days, 0) <= 3 ? "Spring" : daysFormat(days, 0) >= 4 && daysFormat(days, 0) <= 8 ? "Summer" : daysFormat(days, 0) >= 9 && daysFormat(days, 0) <= 11 ? "Autumn" : "Winter";
-    }, 1000);
-
-    function daysFormat(days, format = null) {
-      let years = Math.floor(days / 365);
-      const months = Math.floor((days - years * 365) / 30);
-      const d = Math.round(days - years * 365 - months * 30);
-      years = years + 2022;
-      if (format != null) {
-        if (format == 0) {
-          return months;
+      function suffix(i, d = false) {
+        let j = i % 10;
+        let k = i % 100;
+        if (j == 1 && k != 11) {
+          return i + (d ? "<sup>st</sup>" : "st");
         }
+        if (j == 2 && k != 12) {
+          return i + (d ? "<sup>nd</sup>" : "nd");
+        }
+        if (j == 3 && k != 13) {
+          return i + (d ? "<sup>rd</sup>" : "rd");
+        }
+        return i + (d ? "<sup>th</sup>" : "th");
       }
-      let result = "<h1>" + monthNames[months] + " " + suffix(d, true) + "</h1><h2>" + years + "</h2>";
-      return result;
-    }
-
-    function animate() {
-      const dateOne = "04/11/22";
-      const dateTwo = new Date().toLocaleString();
-      const dateOneObj = new Date(dateOne);
-      const dateTwoObj = new Date(dateTwo);
-      const milliseconds = Math.abs(dateTwoObj - dateOneObj);
-      let hrs = milliseconds / 36e5;
-      hrs = hrs * 72;
-      days = hrs / 24;
-      let hours = (hrs) % 24;
-      let n = new Date(0, 0);
-      n.setSeconds(Math.abs(hours) * 60 * 60);
-      time = new Date(new Date(new Date().toLocaleString().split(" ")[0] + " " + n.toTimeString().slice(0, 8))).toLocaleTimeString("en-US");
-      date = daysFormat(days);
-      let type = time.split(" ")[1];
-      description = time.split(":")[0] - 0 > 12 && time.split(":")[0] - 0 < 5 && type == "AM" ? "Midnight" : time.split(":")[0] - 0 > 5 && time.split(":")[0] - 0 < 12 && type == "AM" ? "Morning" : time.split(":")[0] - 0 > 12 && time.split(":")[0] - 0 < 4 && type == "PM" ? "Noon" : time.split(":")[0] - 0 > 4 && time.split(":")[0] - 0 < 8 && type == "PM" ? "Dawn" : time.split(":")[0] - 0 > 8 && time.split(":")[0] - 0 < 12 && type == "PM" ? "Night" : "";
-      document.querySelector(".time").innerHTML = time + "<br><b>" + description + "</b>";
-      document.querySelector(".date").innerHTML = dayNames[((days.toString().split(".")[0] - 0) % 7)] + ",<br>" + date;
-      document.querySelector(".season").innerHTML = season;
-      document.querySelector(".temp").innerHTML = temp.toFixed(2) + "° <b>F</b><br>" + ((temp - 32) * .56).toFixed(2) + "° <b>C</b>";
-      requestAnimationFrame(animate);
-    }
-    animate();
+  
+      let monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      let dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      let weatherNames = ["Sunny", "Party cloudy", "Chance of rain", "Windy", "High gusts", "Very dry", "Very humid"];
+      let temp = 0;
+      let humidity = 0;
+      let season = "";
+      let hrs = 0;
+      let days = 0;
+      let climateDescription = "Sunny";
+  
+      setInterval(() => {
+        temp = (Math.floor(Math.random() * (2000 - (days / 100))) / 100) + 70;
+        humidity = (Math.floor(Math.random() * (900 - (days / 1000))) / 100) + 10;
+        season = daysFormat(days, 0) >= 1 && daysFormat(days, 0) <= 3 ? "Spring" : daysFormat(days, 0) >= 4 && daysFormat(days, 0) <= 8 ? "Summer" : daysFormat(days, 0) >= 9 && daysFormat(days, 0) <= 11 ? "Autumn" : "Winter";
+      }, 1000);
+      setInterval(() => {
+        climateDescription = weatherNames[((time.split(":")[0] - 0) * Math.random()).toFixed(0)] || "Sunny";
+      }, 10000);
+  
+      function daysFormat(days, format = null) {
+        let years = Math.floor(days / 365);
+        const months = Math.floor((days - years * 365) / 30);
+        const d = Math.round(days - years * 365 - months * 30);
+        years = years + 2022;
+        if (format != null) {
+          if (format == 0) {
+            return months;
+          }
+        }
+        let result = "<h1>" + monthNames[months] + " " + suffix(d, true) + "</h1><h2>" + years + "</h2>";
+        return result;
+      }
+  
+      function animate() {
+        const dateOne = "04/11/22";
+        const dateTwo = new Date().toLocaleString();
+        const dateOneObj = new Date(dateOne);
+        const dateTwoObj = new Date(dateTwo);
+        const milliseconds = Math.abs(dateTwoObj - dateOneObj);
+        let hrs = milliseconds / 36e5;
+        hrs = hrs * 72;
+        days = hrs / 24;
+        let hours = (hrs) % 24;
+        let n = new Date(0, 0);
+        n.setSeconds(Math.abs(hours) * 60 * 60);
+        time = new Date(new Date(new Date().toLocaleString().split(" ")[0] + " " + n.toTimeString().slice(0, 8))).toLocaleTimeString("en-US");
+        date = daysFormat(days);
+        let type = time.split(" ")[1];
+        timeDescription = time.split(":")[0] - 0 > 12 && time.split(":")[0] - 0 < 5 && type == "AM" ? "Midnight" : time.split(":")[0] - 0 > 5 && time.split(":")[0] - 0 < 12 && type == "AM" ? "Morning" : time.split(":")[0] - 0 > 12 && time.split(":")[0] - 0 < 4 && type == "PM" ? "Noon" : time.split(":")[0] - 0 > 4 && time.split(":")[0] - 0 < 8 && type == "PM" ? "Dawn" : time.split(":")[0] - 0 > 8 && time.split(":")[0] - 0 < 12 && type == "PM" ? "Night" : "";
+        document.querySelector(".time").innerHTML = time + "<br><b>" + timeDescription + "</b>";
+        document.querySelector(".date").innerHTML = dayNames[((days.toString().split(".")[0] - 0) % 7)] + ",<br>" + date;
+        document.querySelector(".season").innerHTML = season;
+        document.querySelector(".temp").innerHTML = temp.toFixed(2) + "° <b>F</b><br>" + ((temp - 32) * .56).toFixed(2) + "° <b>C</b>";
+        document.querySelector(".humidity").innerHTML = "Humidity: " + humidity.toFixed(0) + "%";
+        document.querySelector(".container_climate .description").innerHTML = climateDescription;
+        requestAnimationFrame(animate);
+      }
+      animate();
     </script>
   </body>
 </html>
