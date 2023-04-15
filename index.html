@@ -6,11 +6,16 @@
     <title>Bubby's World</title>
     <link rel="stylesheet" href="style.css" />
     <style>
+      @font-face {
+        font-family: "Modern";
+        src: url(fonts/Modern/Modern.ttf);
+      }
       html, body {
-        font-family: Arial;
+        font-family: "Modern", Arial;
+        margin-top: 80px;
       }
       * {
-        color: #222;
+        color: #333;
         font-weight: 100;
       }
       sup {
@@ -23,20 +28,91 @@
         position: relative;
         left: 20px !important;
       }
+      .main-banner {
+        width: 100vw;
+      }
+      .navbar {
+        position: fixed;
+        width: 100%;
+        margin: 0;
+        left: 0;
+        top: 0;
+        right: 0;
+        background: #333;
+        height: 60px;
+        display: flex;
+        text-align: left;
+        align-items: center;
+        justify-content: center;
+      }
+      a {
+        color: #fff !important;
+      }
+      hr {
+        width: 80%;
+        height: 1px !important;
+        border: none !important;
+        background: #333;
+      }
     </style>
   </head>
   <body>
+    <div class="navbar">
+      <a href="/">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="about.html">About</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="map.html">Geography</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="political-status.html">Political</a>
+    </div>
+    <div style="text-align: center">
+      <h3>Welcome to</h3>
+      <h1 style="font-size: 40px; font-weight: 600;">Bubby's World</h1>
+    </div>
+    <img src="banner.png" class="main-banner">
+    <hr>
+    <br>
+    <div style="text-align: center">
+      <h3>Current date, time, and weather</h3>
+    </div>
     <div style="position: relative; float: right; right: 30px; text-align: center" class="container_time">
       <p class="date"></p>
       <p class="time"></p>
-      <hr>
     </div>
     <div style="position: relative; float: left; left: 30px; text-align: center" class="container_climate">
       <h1 class="season"></h1>
       <p class="temp"></p>
       <p class="humidity"></p>
       <b class="description"></b>
-      <hr>
+    </div>
+    <hr style="margin-top: 500px">
+    <div style="text-align: center">
+      <h2>About</h2>
+      <p style="max-width: 70%; margin-left: 15%; font-family: Arial, Helvetica, sans-serif !important">Bubby's World became the 51st state in late 2024. In early 2025, actual full development and colonization of Bubby's World started. Then along came the first governor of the state, ProOfficial, in 2030. In the year 2090, ProOfficial became the permanent president of the U.S. while Bubby became the governor of the state.</p>
+      <br>
+      <br>
+      <h3>The origin of Bubby's World</h3>
+      <p style="max-width: 70%; margin-left: 15%; font-family: Arial, Helvetica, sans-serif !important">Bubby's World started out as a boring old superflat in Minecraft PE in the year 2022. Then, one week after creation, Bubby the Builder came along and built the first neighborhood in the state. He was originally going to sell them for $10m, but instead lowered it to $7.1m. While the neighborhood was getting finished, ProOfficial built the first power plant to power the tiny city. Further developement of stores, restaraunts, other neighnorhoods, and more power plants started. Today, Bubby's World is home to over 500+ homes, 50+ stores & restaraunts, 6 power plants, and several huge towers & famous landmarks.</p>
+      <br>
+      <br>
+      <h3>Fun facts</h3>
+      <p style="max-width: 70%; margin-left: 15%; font-family: Arial, Helvetica, sans-serif !important">Bubby's World is the 51st state.</p>
+      <p style="max-width: 70%; margin-left: 15%; font-family: Arial, Helvetica, sans-serif !important">Bubby's World is the only state you need a passport to visit.</p>
+      <p style="max-width: 70%; margin-left: 15%; font-family: Arial, Helvetica, sans-serif !important">The state's official nickname "The filthy rich state"</p>
+      <p style="max-width: 70%; margin-left: 15%; font-family: Arial, Helvetica, sans-serif !important">Bubby was originally NOT the governor of the state.</p>
+      <p style="max-width: 70%; margin-left: 15%; font-family: Arial, Helvetica, sans-serif !important">Any time unit in Bubby's World is 72 times more tham reality.</p>
+      <p style="max-width: 70%; margin-left: 15%; font-family: Arial, Helvetica, sans-serif !important">Bubby's World is the northermost state.</p>
+      <p style="max-width: 70%; margin-left: 15%; font-family: Arial, Helvetica, sans-serif !important">Bubby's World is the flattest state in the U.S.</p>
+      <p style="max-width: 70%; margin-left: 15%; font-family: Arial, Helvetica, sans-serif !important">Bubby's World was based on a mix of Flordia, California, Chicago, and New York.</p>
+      <br>
+    </div>
+    <div style="text-align: center">
+      <h2>Geography</h2>
+      <h3>Famous national landmarks</h3>
+      <p style="max-width: 70%; margin-left: 15%; font-family: Arial, Helvetica, sans-serif !important">The Bubby Trade Center (B.T.C. 1, 2, 3)</p>
+      <p style="max-width: 70%; margin-left: 15%; font-family: Arial, Helvetica, sans-serif !important">The Empire Bubby Building</p>
+      <p style="max-width: 70%; margin-left: 15%; font-family: Arial, Helvetica, sans-serif !important">The Bubby Sears Tower (B.T.C. 1)</p>
+      <p style="max-width: 70%; margin-left: 15%; font-family: Arial, Helvetica, sans-serif !important">The Status of Bubby</p>
+      <p style="max-width: 70%; margin-left: 15%; font-family: Arial, Helvetica, sans-serif !important">Crosshair Mountain (National Park)</p>
+      <p style="max-width: 70%; margin-left: 15%; font-family: Arial, Helvetica, sans-serif !important">The Bubby Trade Center (B.T.C. 1, 2, 3)</p>
+      <p style="max-width: 70%; margin-left: 15%; font-family: Arial, Helvetica, sans-serif !important">The Pentagon [remake]</p>
+      <p style="max-width: 70%; margin-left: 15%; font-family: Arial, Helvetica, sans-serif !important">Area 52 [remake]</p>
+      <p style="max-width: 70%; margin-left: 15%; font-family: Arial, Helvetica, sans-serif !important">Maine [remake]</p>
     </div>
     <script>
       function suffix(i, d = false) {
